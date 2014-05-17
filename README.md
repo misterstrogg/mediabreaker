@@ -23,18 +23,18 @@ I don't like messing with consumer grade raid, but I do like having my dvd and b
 
 Here's what the pieces do. Each one might have some configs you need to adjust, and most have some additional comments inside. WARNING THIS WILL RM -RF /videolinks and /musiclinks by default. 
 
-processvideo: sets up a lock file before calling the subscripts, so you can safely cron it (in a screen session if desired) and not worry about multiple encodes happening. Also calls the link and backup scripts. 
+**processvideo:** sets up a lock file before calling the subscripts, so you can safely cron it (in a screen session if desired) and not worry about multiple encodes happening. Also calls the link and backup scripts. 
 
-makemkvs: wrapper to specify source and destination directories for the handbreaker scripts here. It's good to read and write from separate disks for perf reasons. Configure video options in the handbreaker scripts themselves. 
+**makemkvs:** wrapper to specify source and destination directories for the handbreaker scripts here. It's good to read and write from separate disks for perf reasons. Configure video options in the handbreaker scripts themselves. 
 
-handbreaker.pl: Looks for VIDEO\_TS folders inside dvd title folders in a source directory, and writes them as plain mkv files in a destination directory. Skips short titles, and appends the title number to all titles but title 1. Grabs all audio streams.
+**handbreaker.pl:** Looks for VIDEO\_TS folders inside dvd title folders in a source directory, and writes them as plain mkv files in a destination directory. Skips short titles, and appends the title number to all titles but title 1. Grabs all audio streams.
 
-brhandbreaker.pl: Looks for mkv files without parent directories in a source folder, writes compressed mkv files to a destination directory. 
+**brhandbreaker.pl:** Looks for mkv files without parent directories in a source folder, writes compressed mkv files to a destination directory. 
 
-makelinks: configuration wrapper for link scripts. Set up your source and destination directories here, and it will create a sane tree of links for titles across multiple disks. protip: Share the top level folders of these trees via samba (enable follow symlinks), and make them read only. WARNING THIS SCRIPT WILL RM -RF /videolinks and /musiclinks. I need to implement a safer way.
+**makelinks:** configuration wrapper for link scripts. Set up your source and destination directories here, and it will create a sane tree of links for titles across multiple disks. protip: Share the top level folders of these trees via samba (enable follow symlinks), and make them read only. WARNING THIS SCRIPT WILL RM -RF /videolinks and /musiclinks. I need to implement a safer way.
 
-linkmaker: The script that does the work of making links.
+**linkmaker:** The script that does the work of making links.
 
-backupmp3/backupmkv: scripts to mount your usb drive and copy your files to it...if it successfully mounts. needs some alerting probably. check your backups.
+**backupmp3/backupmkv:** scripts to mount your usb drive and copy your files to it...if it successfully mounts. needs some alerting probably. check your backups.
 
 Credit to David Colbert for original handbreaker perl wrappers
