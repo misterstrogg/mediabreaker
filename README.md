@@ -3,13 +3,12 @@ mediabreaker
 
 To manage home media on JBOD. Utils to:
 
---* 
-Process DVD/Bluray backups into mkv files.
-Create an easy to browse directory structure of symlinks for your content scattered accross multiple drives.
-Schedule overnight wake-ups of the system to do these things. 
-Run in screen so one can check on progress, or interrupt a title running forever without killing the entire batch. 
-Safe to rerun, will skip titles that exist rather than overrite them. 
-Clear out failed files to have the system automatically retry it the next run.
+--* Process DVD/Bluray backups into mkv files.
+--* Create an easy to browse directory structure of symlinks for your content scattered accross multiple drives.
+--* Schedule overnight wake-ups of the system to do these things. 
+--* Run in screen so one can check on progress, or interrupt a title running forever without killing the entire batch. 
+--* Safe to rerun, will skip titles that exist rather than overrite them. 
+--* Clear out failed files to have the system automatically retry it the next run.
 --*
 
 The system encodes all dvd's same way (blurays are a higher quality), which I'm generally happy with. I get down to 20-40% of the original MPEG2 size for DVDs. 'Raw' DVD isn't that sharp when you look closely, but for most content I have a hard time telling the difference between raw and re-encoded. You'd have to clone the perl script to have different sets of video options, like quality level or deinterlacing.
