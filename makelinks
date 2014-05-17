@@ -5,7 +5,7 @@
 
 SCRIPTLOCATION="/home/garage/bin/"
 
-#Cleanup and set up anew. Do NOT use an existing folder here. 
+#Cleanup and set up anew. Do NOT use an existing folder here. Share this via samba or NFS for remote access
 mkdir -p /videolinks
 cd /videolinks
 rm -rf /videolinks/*
