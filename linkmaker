@@ -1,4 +1,6 @@
 #!/bin/bash
+#Strogg 2011
+
 . /etc/profile
 . /home/garage/.profile
 

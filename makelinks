@@ -69,6 +69,6 @@ mkdir /musiclinks/s
 mkdir /musiclinks/y
 
 cd /musiclinks
-$SCRIPTLOCATION/linkmaker /900/mp3 /musiclinks/s /musiclinks/musiclinkstree
-$SCRIPTLOCATION/linkmaker /1000/mp3_ayun /musiclinks/y /musiclinks/musiclinkstree
-$SCRIPTLOCATION/linkmaker /1000/mp3_ayun/Compilations /musiclinks/y /musiclinks/musiclinkstree
+$SCRIPTLOCATION/linkmaker /900/mp3 /musiclinks/s /musiclinks/musiclinks
+$SCRIPTLOCATION/linkmaker /1000/mp3_ayun /musiclinks/y /musiclinks/musiclinks
+$SCRIPTLOCATION/linkmaker /1000/mp3_ayun/Compilations /musiclinks/y /musiclinks/musiclinks
