@@ -1,0 +1,26 @@
+#!/bin/bash
+#This is our wrapper, to ensure we aren't running multiple rendering jobs at once frying our cpu
+#It creates a lock, calls the scripts, sets the machine to wake from suspend at midnight and scedules a suspend a minute after processing is done.
+
+#I cron this like this so I can attach to it via screen. the user has elevated permissions in my /etc/sudoers: garage  ALL=NOPASSWD: ALL 
+#1 0     * * *   garage  screen -d -m -S procvids -t processvideo /home/garage/bin/processvide
+
+#Change these to match your system. Consider wakeup time below. 
+LOCK_FILE="/var/lock/makemkv"
+SCRIPT_DIR="/home/garage/bin"
+
+if [ ! -e $LOCK_FILE ]; then
+ touch $LOCK_FILE
+ #comment out subscript you aren't using
+ sudo ${SCRIPT_DIR}/makemkvs
+ sudo ${SCRIPT_DIR}/makelinks
+ sudo ${SCRIPT_DIR}/backupmkvs
+ sudo ${SCRIPT_DIR}/backupmp3
+#probably want to comment out these next two lines until you are sure things are running
+ sudo bash -c "echo `date '+%s' -d 'Tomorrow 00:00:00'` > /sys/class/rtc/rtc0/wakealarm"
+ echo 'pm-suspend' | sudo at now + 1 minutes
+ rm -f $LOCK_FILE
+else
+  echo "Script is still running"
+fi
+

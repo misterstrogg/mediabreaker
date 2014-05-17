@@ -1,0 +1,36 @@
+#!/bin/bash
+. /etc/profile
+. /home/garage/.profile
+
+ls $1 | while read dir; do
+
+STARTLETTER=`echo "$dir" | awk '{print substr($1,1,1)}' | tr [a-z] [A-Z]`
+
+  if [ ! -e "${2}/${dir}" ]
+  then
+	echo ln -s "${1}/${dir}" "${2}/${dir}"
+	ln -s "${1}/${dir}" "${2}/${dir}"
+  else
+	echo "LINK EXISTS CREATING ALTERNATE"
+	echo ln -s "${1}/${dir}" "${2}/${dir}_2"
+	ln -s "${1}/${dir}" "${2}/${dir}_2"
+  fi
+
+#echo "${2}/${STARTLETTER}"
+
+  if [ ! -z "${3}" ] 
+  then
+	mkdir -p "${3}/${STARTLETTER}"
+	if [ ! -e "${3}/${STARTLETTER}/${dir}" ]
+	then
+		echo ln -s "${1}/${dir}" "${3}/${STARTLETTER}/${dir}" 
+		ln -s "${1}/${dir}" "${3}/${STARTLETTER}/${dir}" 
+	else
+		echo "DUPLICATE FOUND, skipping"
+		echo "DUPLICATE FOUND - CREATING ALTERNATE"
+		echo ln -s "${1}/${dir}" "${3}/${STARTLETTER}/${dir}_2" 
+		ln -s "${1}/${dir}" "${3}/${STARTLETTER}/${dir}_2" 
+	fi
+  fi
+done	
+

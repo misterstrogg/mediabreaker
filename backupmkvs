@@ -1,0 +1,28 @@
+#!/bin/bash
+#Backup to a USB drive, mount if needed and unmount when done. 
+
+volume="4TB"
+mount /dev/disk/by-uuid/443889F53889E5F0 /media/$volume
+
+#dont run if drive are not there, you'll fill up /
+if mount|grep $volume 
+then
+cp -uvp /900/mkv/movies/* /media/$volume/movies/
+cp -uvp /1000/mkv/movies/* /media/$volume/movies/
+cp -uvp /1001/mkv/movies/* /media/$volume/movies/
+cp -uvp /2001/mkv/movies/* /media/$volume/movies/
+cp -uvp /900/brmkv/* /media/$volume/hdmovies/
+cp -uvp /1000/brmkv/* /media/$volume/hdmovies/
+cp -uvp /1001/brmkv/* /media/$volume/hdmovies/
+cp -uvp /2001/brmkv/* /media/$volume/hdmovies/
+
+
+cp -uvpr /900/mkv/series/* /media/$volume/series/
+cp -uvpr /1000/mkv/series/* /media/$volume/series/
+cp -uvpr /1001/mkv/series/* /media/$volume/series/
+cp -uvpr /2001/mkv/series/* /media/$volume/series/
+
+cp -uvpr /home/garage/bin /media/$volume/bin
+
+umount /media/$volume
+fi

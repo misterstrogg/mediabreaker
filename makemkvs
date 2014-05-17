@@ -1,0 +1,13 @@
+#Always try to copy from one drive to another. This both gives you a bit of redundancy and improves perf
+
+#process sd movies and series into their respective folders
+#rip into these source folders with dvdshrink or ripper of choice. choose option to create VIDEO_TS folders inside 'title' folders, as handbreaker.pl looks for these
+perl ~/bin/handbreaker.pl /900/dvd/series /1000/mkv/series
+perl ~/bin/handbreaker.pl /900/dvd/movies /1000/mkv/movies
+perl ~/bin/handbreaker.pl /1000/dvd/series /900/mkv/series
+perl ~/bin/handbreaker.pl /1000/dvd/movies /900/mkv/movies
+
+#no HD series yet, one big pile. makeMKV rips blurays to uncompressed MKV files (this script's name is a only coincidentally related.) 
+#brhandbreaker will process all mkv files directly in the folder, and expects no parent folder
+perl ~/bin/brhandbreaker.pl /900/brrips /1000/brmkv
+perl ~/bin/brhandbreaker.pl /1000/brrips /900/brmkv

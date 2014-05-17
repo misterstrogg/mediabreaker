@@ -1,0 +1,72 @@
+#!/bin/bash
+#strogg 2012
+
+#. /etc/profile
+
+SCRIPTLOCATION="/home/garage/bin/"
+
+#Cleanup and set up anew. Do NOT use an existing folder here. 
+cd /videos
+rm -rf /videos/*
+
+#our tree. Some folders to put more links/folders in, and some links to the root folders for manual browsing
+mkdir /videos/a-z
+mkdir /videos/movies
+mkdir /videos/hdmovies
+mkdir /videos/series
+#These are my raw JBOD mounts. Each has a dvd or brrips 'source folder', and a mkv(SD) or brmkv(HD) destination
+ln -s /2001 /videos/2001
+ln -s /900 /videos/900
+ln -s /1001 /videos/1001
+ln -s /1000 /videos/1000
+ln -s /2001/mkv/fitness /videos/fitness
+
+
+#linkmaker takes required source and destination directories as parameters, as well as an optional link in our alphabetical listing
+#if two titles would create the same link, an new link is created with a number appended. 
+
+#link HD versions first, just in case we have both
+#raw bluray rips 
+$SCRIPTLOCATION/linkmaker /900/brrips /videos/hdmovies /videos/a-z
+$SCRIPTLOCATION/linkmaker /1000/brrips /videos/hdmovies /videos/a-z
+
+#processed bluray also in the hd folder
+$SCRIPTLOCATION/linkmaker /900/brmkv /videos/hdmovies /videos/a-z
+$SCRIPTLOCATION/linkmaker /1000/brmkv /videos/hdmovies /videos/a-z
+$SCRIPTLOCATION/linkmaker /1001/brmkv /videos/hdmovies /videos/a-z
+$SCRIPTLOCATION/linkmaker /2001/brmkv /videos/hdmovies /videos/a-z
+
+#processed bluray again. movies contains ALL movies
+$SCRIPTLOCATION/linkmaker /900/brmkv /videos/movies
+$SCRIPTLOCATION/linkmaker /1000/brmkv /videos/movies
+$SCRIPTLOCATION/linkmaker /1001/brmkv /videos/movies
+$SCRIPTLOCATION/linkmaker /2001/brmkv /videos/movies
+
+#Standard def movie links. we don't bother with unprocessed here
+$SCRIPTLOCATION/linkmaker /2001/mkv/movies /videos/movies /videos/a-z
+$SCRIPTLOCATION/linkmaker /1001/mkv/movies /videos/movies /videos/a-z
+$SCRIPTLOCATION/linkmaker /1000/mkv/movies /videos/movies /videos/a-z
+$SCRIPTLOCATION/linkmaker /900/mkv/movies /videos/movies /videos/a-z
+
+#Series, raw as well as processed
+$SCRIPTLOCATION/linkmaker /1000/dvd/series /videos/series /videos/a-z
+$SCRIPTLOCATION/linkmaker /900/dvd/series /videos/series /videos/a-z
+$SCRIPTLOCATION/linkmaker /2001/mkv/series /videos/series /videos/a-z
+$SCRIPTLOCATION/linkmaker /1001/mkv/series /videos/series /videos/a-z
+$SCRIPTLOCATION/linkmaker /1000/mkv/series /videos/series /videos/a-z
+$SCRIPTLOCATION/linkmaker /900/mkv/series /videos/series /videos/a-z
+
+#used to have varous 'recent directories' for finding recent rips
+#mkdir /videos/_Recent30
+#find -L /videos -maxdepth 1 -ctime -30 -type l -exec ln -s {} /videos/_Recent30 \;
+
+#handle mp3's more simply, but keep my shit separate from my ladyfriend's
+rm -rf /music/*
+mkdir /music/musictree
+mkdir /music/s
+mkdir /music/y
+
+cd /music
+$SCRIPTLOCATION/linkmaker /900/mp3 /music/s /music/musictree
+$SCRIPTLOCATION/linkmaker /1000/mp3_ayun /music/y /music/musictree
+$SCRIPTLOCATION/linkmaker /1000/mp3_ayun/Compilations /music/y /music/musictree

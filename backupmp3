@@ -1,0 +1,14 @@
+#!/bin/bash
+#Backup to a USB drive, mount if needed and unmount when done. 
+
+volume="4TB"
+mount /dev/disk/by-uuid/443889F53889E5F0 /media/$volume
+
+#dont run if drive are not there, you'll fill up /
+if mount|grep $volume 
+then
+cp -ruvp /900/mp3/* /media/$volume/mp3/
+cp -ruvp /1000/mp3_ayun/* /media/$volume/mp3_ayun/
+
+umount /media/$volume
+fi
