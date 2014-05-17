@@ -4,7 +4,7 @@ mediabreaker
 To manage home media on Linux+JBOD. Utils to:  
 
 * Process DVD/Bluray backups into mkv files.
-* Create an easy to browse directory structure of symlinks for your content scattered accross multiple drives ( **J**\ ust a **B**unch **O**f **D**ISKS).
+* Create an easy to browse directory structure of symlinks for your content scattered accross multiple drives ( **J** ust a **B** unch **O** **D** ISKS).
 * Schedule overnight wake-ups of the system to do these things. 
 * Run in screen so one can check on progress, or interrupt a title running forever without killing the entire batch. 
 * Safe to rerun, will skip titles that exist rather than overrite them. 
