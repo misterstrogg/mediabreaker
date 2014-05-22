@@ -24,21 +24,24 @@ I use multiple harddrives to my advantage for ripping and encoding performance (
 
 I use a few xmbc front ends, which wake up the server when they wake up (there's a WOL function in xbmc). My back-end is xbmcbuntu as well. The processed output is also a reasonable size for keeping a few favorites on your smartphone.
 
-# USAGE
+# SETUP
 
 1. Rip your DVDs and BluRays to the source folders. 
 2. Install handbrake and HandBrakeCLI (www.handbrake.fr), and set path in the 'handbreaker' perl scripts (default /usr/local/HandBrakeCLI). You might wish to comment out the system call in these scripts for testing at first. 
 3. Configure sources and destination directories inside makemkv, makelinks and/or backup\* scripts. You can run these manually if you wish.
 4. Choose components to run and a wake-up time inside processvideo, and cron it to run a minute or so after the machine's scheduled wake-up (ideally at a time when you are NOT likely to be watching video).
-5. Occasionally check on progress, and clean out the raw video from your source folders when you are satisfied. (I'm lazy and just look quickly for any 'runty' looking filesizes, then I mv everything in the source folder to a 'processedDVD' folder that I can empty when i really need to).
+
+# UPKEEP
+
+Occasionally check on your progress. Clean out the raw video from your source folders when you are satisfied, and clean up any extras or redundant 'titles'. I'm lazy and just look quickly for any 'runty' looking filesizes, then I mv everything in the source folder to a 'processedDVD' folder that I can empty when i really need to. I usually only rip the main movie and ignore the trailers and behind the scenes stuff, but the scripts do work with fulldisc rips. For those, I move all files with 'title#' appended into an 'extras' folder and delete any unwanted cuts of the movie, leaving only the main movie in the movies folder. If you wanted to keep all the extras with the movie, you could modify the perl scripts quite easily to create a parent folder (some frontends actually want this).
 
 Here's what the pieces do. Each one might have some configs you need to adjust, and most have some additional comments inside. WARNING THIS WILL RM -RF /videolinks and /musiclinks by default. 
 
 **processvideo:** sets up a lock file before calling the subscripts, so you can safely cron it (in a screen session if desired) and not worry about multiple encodes happening. Also calls the link and backup scripts. Sets the machine to wake up (default at midnight) and suspends it when done.
 
-**makemkvs:** wrapper to specify source and destination directories for the handbreaker scripts here. It's good to read and write from separate disks for perf reasons. Configure video options in the handbreaker scripts themselves. 
+**makemkvs:** wrapper to specify source and destination directories for the handbreaker scripts here. It's good to read and write from separate disks for perf reasons, but not strictly required. Configure video options in the handbreaker scripts themselves. 
 
-**handbreaker.pl:** Looks for VIDEO\_TS folders inside dvd title folders in a source directory, and writes them as plain mkv files in a destination directory. Skips short titles, and appends the title number to all titles but title 1. Grabs all audio streams (they are small relative to the video, but consider not ripping the ones you dont want).
+**handbreaker.pl:** Looks for VIDEO\_TS folders inside dvd title folders in a source directory, and writes mkv files in a destination directory. Skips short titles, and appends the title number to all titles but title 1. Grabs all audio streams (they are small relative to the video, but consider not ripping the ones you dont want).
 
 **brhandbreaker.pl:** Looks for mkv files without parent directories in a source folder, writes compressed mkv files to a destination directory. 
 
