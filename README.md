@@ -26,7 +26,7 @@ I use a few xmbc front ends, which wake up the server when they wake up (there's
 
 # USAGE
 
-1. Rip your DVDs and BluRays to the source folder. 
+1. Rip your DVDs and BluRays to the source folders. 
 2. Install handbrake and HandBrakeCLI (www.handbrake.fr), and set path in the 'handbreaker' perl scripts (default /usr/local/HandBrakeCLI). You might wish to comment out the system call in these scripts for testing at first. 
 3. Configure sources and destination directories inside makemkv, makelinks and/or backup\* scripts. You can run these manually if you wish.
 4. Choose components to run and a wake-up time inside processvideo, and cron it to run a minute or so after the machine's scheduled wake-up (ideally at a time when you are NOT likely to be watching video).
