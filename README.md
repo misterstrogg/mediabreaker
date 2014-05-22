@@ -45,7 +45,7 @@ Here's what the pieces do. Each one might have some configs you need to adjust, 
 
 **brhandbreaker.pl:** Looks for mkv files without parent directories in a source folder, writes compressed mkv files to a destination directory. 
 
-**makelinks:** configuration wrapper for link script. Set up your source and destination directories here, and it will create a tree of links for titles across multiple disks. protip: Share the destination directories via samba (enable follow symlinks). WARNING THIS SCRIPT WILL RM -RF /videolinks and /musiclinks. (I probably need to implement a safer way.)
+**makelinks:** configuration wrapper for link script. Set up your source and destination directories here, and it will create a tree of links for titles across multiple disks. protip: Share the destination directories via samba (enable follow symlinks), or point your local plex install here. WARNING THIS SCRIPT WILL RM -RF /videolinks and /musiclinks. (I probably need to implement a safer way.)
 
 **linkmaker:** The script that does the work of making links.
 
